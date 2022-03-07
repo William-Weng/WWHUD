@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "WWHUD",
+        "repositoryURL": "/Users/iOS/Desktop/WWHUD",
+        "state": {
+          "branch": "main",
+          "revision": "4bbd78e990ab74447b4ed5a8f8ec32c7625e959b",
+          "version": null
+        }
+      },
+      {
+        "package": "WWPrint",
+        "repositoryURL": "https://github.com/William-Weng/WWPrint",
+        "state": {
+          "branch": null,
+          "revision": "e4ad2863717465f224aa676f10a3a7ff1df58f7c",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
