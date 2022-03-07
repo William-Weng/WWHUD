@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "WWHUD",
-        "repositoryURL": "/Users/iOS/Desktop/WWHUD",
+        "repositoryURL": "https://github.com/William-Weng/WWHUD.git",
         "state": {
           "branch": "main",
-          "revision": "4bbd78e990ab74447b4ed5a8f8ec32c7625e959b",
+          "revision": "97cc5131df72ce899db744cfbf107f9322ee6379",
           "version": null
         }
       },
