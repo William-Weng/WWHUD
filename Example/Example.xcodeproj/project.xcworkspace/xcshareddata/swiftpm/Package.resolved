@@ -5,9 +5,9 @@
         "package": "WWHUD",
         "repositoryURL": "https://github.com/William-Weng/WWHUD.git",
         "state": {
-          "branch": "main",
-          "revision": "97cc5131df72ce899db744cfbf107f9322ee6379",
-          "version": null
+          "branch": null,
+          "revision": "44293dee39f020603776fcf4fd0c299dbdf21bb0",
+          "version": "1.0.0"
         }
       },
       {

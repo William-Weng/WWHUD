@@ -13,6 +13,7 @@
                 <outlet property="heightLayoutConstraint" destination="toc-Pi-S2H" id="mft-Nm-TXX"/>
                 <outlet property="myActivityIndicatorView" destination="1s7-SI-Hwe" id="HYR-bK-gSb"/>
                 <outlet property="myImageView" destination="yrq-h8-vgP" id="Ki9-Qr-nC6"/>
+                <outlet property="myProgressLabel" destination="QR7-yp-f4Y" id="VKR-7c-PAs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,13 +33,22 @@
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1s7-SI-Hwe">
                     <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                 </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QR7-yp-f4Y">
+                    <rect key="frame" x="20" y="500" width="374" height="43"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="yrq-h8-vgP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Htg-Ic-6UV"/>
+                <constraint firstItem="QR7-yp-f4Y" firstAttribute="top" secondItem="yrq-h8-vgP" secondAttribute="bottom" constant="20" id="VRD-gb-uIe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QR7-yp-f4Y" secondAttribute="trailing" constant="20" id="eTD-QK-bvd"/>
                 <constraint firstItem="1s7-SI-Hwe" firstAttribute="centerX" secondItem="yrq-h8-vgP" secondAttribute="centerX" id="hoc-T7-1yN"/>
                 <constraint firstItem="1s7-SI-Hwe" firstAttribute="centerY" secondItem="yrq-h8-vgP" secondAttribute="centerY" id="idT-ZZ-1pf"/>
+                <constraint firstItem="QR7-yp-f4Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="pCj-M2-cN8"/>
                 <constraint firstItem="yrq-h8-vgP" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="yfJ-9P-DLz"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="139.95535714285714"/>

@@ -10,9 +10,10 @@ import UIKit
 final class HUDViewController: UIViewController {
     
     @IBOutlet weak var myImageView: UIImageView!
+    @IBOutlet weak var myProgressLabel: UILabel!
     @IBOutlet weak var myActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var heightLayoutConstraint: NSLayoutConstraint!
-    
+        
     private var gifEffectImageView: UIImageView?
     private var replicatorLayer = CAReplicatorLayer()
     private var gifEffectBlock: ((Result<Constant.GIFImageInformation, Error>) -> Void)?
@@ -20,31 +21,12 @@ final class HUDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         transparent()
+        myProgressLabel.text = ""
     }
 }
 
 // MARK: - 公開的funciton
 extension HUDViewController {
-    
-    /// 設定高度 (大小)
-    /// - Parameter height: CGFloat
-    func heightSetting(_ height: CGFloat = 64.0) {
-        heightLayoutConstraint.constant = height
-        self.view.setNeedsLayout()
-        self.view.layoutIfNeeded()
-    }
-    
-    /// 移除所有動畫效果
-    func removeAllEffect() {
-        
-        removeGifEffect()
-        replicatorLayer.removeAllAnimations()
-        replicatorLayer.removeFromSuperlayer()
-        
-        myActivityIndicatorView.isHidden = true
-        myImageView.image = nil
-        myImageView.layer.removeAllAnimations()
-    }
     
     /// [顯示iOS系統預設的UIActivityIndicatorView](http://furnacedigital.blogspot.com/2011/06/uiactivityindicatorview.html)
     func defaultEffect() {
@@ -108,6 +90,37 @@ extension HUDViewController {
         replicatorLayer.addSublayer(instanceLayer)
                 
         myImageView.layer.addSublayer(replicatorLayer)
+    }
+    
+    /// 設定高度 (大小)
+    /// - Parameter height: CGFloat
+    func heightSetting(_ height: CGFloat = 64.0) {
+        heightLayoutConstraint.constant = height
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
+    
+    /// 移除所有動畫效果
+    func removeAllEffect() {
+        
+        removeGifEffect()
+        replicatorLayer.removeAllAnimations()
+        replicatorLayer.removeFromSuperlayer()
+        
+        myActivityIndicatorView.isHidden = true
+        myImageView.image = nil
+        myImageView.layer.removeAllAnimations()
+    }
+    
+    /// 更新進度文字及字型
+    /// - Parameters:
+    ///   - text: String?
+    ///   - font: UIFont
+    ///   - textColor: 文字顏色
+    func updateProgess(text: String?, font: UIFont = .systemFont(ofSize: 36.0), textColor: UIColor = .white) {
+        myProgressLabel.textColor = textColor
+        myProgressLabel.font = font
+        myProgressLabel.text = text
     }
 }
 

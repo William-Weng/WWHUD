@@ -82,14 +82,27 @@ public extension WWHUD {
     
     /// 顯示一段時間的HUD動畫，然後會移除
     /// - Parameters:
-    ///   - effect: AnimationEffec?
+    ///   - effect: AnimationEffect?
     ///   - height: CGFloat
     ///   - backgroundColor: UIColor
     ///   - duration: TimeInterval
     ///   - options: UIView.AnimationOptions
     ///   - completion: ((UIViewAnimatingPosition) -> Void)?
     func flash(effect: AnimationEffect? = nil, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.1), animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)?) {
+        
         display(effect: effect, height: height, backgroundColor: backgroundColor)
-        dismiss(animation: duration, options: options) { postion in completion?(postion) }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.dismiss(animation: duration, options: options) { postion in completion?(postion) }
+        }
+    }
+    
+    /// 更新進度文字及字型
+    /// - Parameters:
+    ///   - text: String?
+    ///   - font: UIFont
+    ///   - textColor: 文字顏色
+    func updateProgess(text: String?, font: UIFont = .systemFont(ofSize: 36.0), textColor: UIColor = .white) {
+        self.hudViewController.updateProgess(text: text, font: font, textColor: textColor)
     }
 }
