@@ -14,9 +14,10 @@ final class HUDViewController: UIViewController {
     @IBOutlet weak var myActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var heightLayoutConstraint: NSLayoutConstraint!
         
-    private var gifEffectImageView: UIImageView?
     private var replicatorLayer = CAReplicatorLayer()
+    private var gifEffectImageView: UIImageView?
     private var gifEffectBlock: ((Result<Constant.GIFImageInformation, Error>) -> Void)?
+    private var isGifEffectStop = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,15 @@ extension HUDViewController {
         
         guard addGifImageView() else { return }
         
-        gifEffectBlock = { _ in }
+        isGifEffectStop = false
+        
+        gifEffectBlock = { result in
+            switch result {
+            case .failure(_): break
+            case .success(let info): info.pointer.pointee = self.isGifEffectStop
+            }
+        }
+        
         _ = gifEffectImageView?._GIF(url: url, options: options, result: { self.gifEffectBlock?($0) })
     }
     
@@ -174,6 +183,7 @@ private extension HUDViewController {
         
         gifEffectImageView = UIImageView(frame: myImageView.bounds)
         gifEffectImageView?.backgroundColor = .clear
+        gifEffectImageView?.contentMode = .scaleAspectFit
         
         guard let gifEffectImageView = gifEffectImageView else { return false }
         myImageView.addSubview(gifEffectImageView)
@@ -181,11 +191,13 @@ private extension HUDViewController {
         return true
     }
     
-    /// 移除GIF效果 => 把View移掉 / Block移掉
+    /// 移除GIF效果 => 把View移掉 / GIF動畫關掉
     func removeGifEffect() {
+        
+        isGifEffectStop = true
+        
         gifEffectImageView?.removeFromSuperview()
         gifEffectImageView = nil
-        gifEffectBlock = nil
     }
 }
 
