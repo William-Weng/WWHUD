@@ -10,12 +10,17 @@ import UIKit
 import WWPrint
 import WWHUD
 
+// MARK: - ViewController
 final class ViewController: UIViewController {
     
     private var timer: CADisplayLink?
     private var percentage: Int = 0
     
     override func viewDidLoad() { super.viewDidLoad() }
+}
+
+// MARK: - @IBAction
+private extension ViewController {
     
     @IBAction func displayHUD(_ sender: UIBarButtonItem) {
         
@@ -87,10 +92,10 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - 小工具
-extension ViewController {
+private extension ViewController {
     
     /// 取消HUD
-    private func dismissHUD() {
+    func dismissHUD() {
         percentage = 0
         timer?.invalidate()
         timer = nil
@@ -99,7 +104,7 @@ extension ViewController {
     
     /// 更新進度文字Timer
     /// - Parameter selector: Selector
-    private func updateProgressPercentage(selector: Selector) {
+    func updateProgressPercentage(selector: Selector) {
         timer?.invalidate()
         timer = nil
         timer = CADisplayLink(target: self, selector: selector)
