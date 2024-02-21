@@ -68,7 +68,7 @@ public extension WWHUD {
     ///   - duration: TimeInterval
     ///   - options: UIView.AnimationOptions
     ///   - completion: ((UIViewAnimatingPosition) -> Void)?
-    func dismiss(animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)?) {
+    func dismiss(animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)? = nil) {
         
         hudWindow.alpha = 1.0
         
@@ -88,7 +88,7 @@ public extension WWHUD {
     ///   - duration: TimeInterval
     ///   - options: UIView.AnimationOptions
     ///   - completion: ((UIViewAnimatingPosition) -> Void)?
-    func flash(effect: AnimationEffect? = nil, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.1), animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)?) {
+    func flash(effect: AnimationEffect? = nil, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.1), animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)? = nil) {
         
         display(effect: effect, height: height, backgroundColor: backgroundColor)
         

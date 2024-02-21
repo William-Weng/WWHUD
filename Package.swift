@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "WWHUD", targets: ["WWHUD"]),
     ],
     dependencies: [
-        .package(name: "WWPrint", url: "https://github.com/William-Weng/WWPrint.git", from: "1.2.0"),
+        .package(url: "https://github.com/William-Weng/WWPrint.git", from: "1.2.0"),
     ],
     targets: [
         .target(name: "WWHUD", dependencies: []),

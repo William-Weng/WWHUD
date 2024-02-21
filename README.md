@@ -1,18 +1,18 @@
-# WWHUD
+# WWHUD - Head Up Display
 
-[![Swift-5.6](https://img.shields.io/badge/Swift-5.6-orange.svg?style=flat)](https://developer.apple.com/swift/) [![iOS-14.0](https://img.shields.io/badge/iOS-14.0-pink.svg?style=flat)](https://developer.apple.com/swift/) [![Swift Package Manager-SUCCESS](https://img.shields.io/badge/Swift_Package_Manager-SUCCESS-blue.svg?style=flat)](https://developer.apple.com/swift/) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-yellow.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift-5.6](https://img.shields.io/badge/Swift-5.6-orange.svg?style=flat)](https://developer.apple.com/swift/) [![iOS-14.0](https://img.shields.io/badge/iOS-14.0-pink.svg?style=flat)](https://developer.apple.com/swift/) ![](https://img.shields.io/github/v/tag/William-Weng/WWHUD) [![Swift Package Manager-SUCCESS](https://img.shields.io/badge/Swift_Package_Manager-SUCCESS-blue.svg?style=flat)](https://developer.apple.com/swift/) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-yellow.svg?style=flat)](https://developer.apple.com/swift/)
 
-Custom read animation, support custom pictures, GIF animation. => [HUD - Head Up Display](https://youtu.be/6XVxvRKoAHM)
-
-自定義讀取動畫，支援自定義圖片、GIF動畫 => [HUD - Head Up Display](https://youtu.be/6XVxvRKoAHM)
+## [Introduction - 簡介](https://swiftpackageindex.com/William-Weng)
+- [Custom read animation, support custom pictures, GIF animation.](https://youtu.be/6XVxvRKoAHM)
+- [自定義讀取動畫，支援自定義圖片、GIF動畫。](https://youtu.be/6XVxvRKoAHM)
 
 ![](./Example.gif)
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 
-```
+```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.2.0"))
 ]
 ```
 
@@ -28,6 +28,9 @@ final class ViewController: UIViewController {
     private var percentage: Int = 0
     
     override func viewDidLoad() { super.viewDidLoad() }
+}
+
+private extension ViewController {
     
     @IBAction func displayHUD(_ sender: UIBarButtonItem) {
         
@@ -53,9 +56,7 @@ final class ViewController: UIViewController {
             wwPrint(postion)
         }
     }
-    
-    /// 更新進度 => 0% ~ 100%
-    /// - Parameter sender: CADisplayLink
+ 
     @objc private func updateProgressForHUD(_ sender: CADisplayLink) {
         
         let percentageText = "\(percentage) %"
@@ -66,8 +67,6 @@ final class ViewController: UIViewController {
         if (percentage > 100) { dismissHUD() }
     }
     
-    // 更新進度 => "努力下載中…" -> "下載快一半…" -> "就快下載完成了…" -> "還差一點點…" -> "終於下載完成了…"
-    /// - Parameter sender: CADisplayLink
     @objc private func updateProgressForGifHUD(_ sender: CADisplayLink) {
         
         var percentageText = "努力下載中…"
@@ -98,20 +97,16 @@ final class ViewController: UIViewController {
     }
 }
 
-// MARK: - 小工具
-extension ViewController {
+private extension ViewController {
     
-    /// 取消HUD
-    private func dismissHUD() {
+    func dismissHUD() {
         percentage = 0
         timer?.invalidate()
         timer = nil
         WWHUD.shared.dismiss { _ in WWHUD.shared.updateProgess(text: nil) }
     }
     
-    /// 更新進度文字Timer
-    /// - Parameter selector: Selector
-    private func updateProgressPercentage(selector: Selector) {
+    func updateProgressPercentage(selector: Selector) {
         timer?.invalidate()
         timer = nil
         timer = CADisplayLink(target: self, selector: selector)
