@@ -16,6 +16,13 @@ dependencies: [
 ]
 ```
 
+### Function - 可用函式|函式|功能|
+|-|-|
+|display(effect:height:backgroundColor:)|顯示HUD動畫|
+|dismiss(animation:options:completion:)|移除HUD顯示|
+|flash(effect:height:backgroundColor:animation:options:completion:)|顯示一段時間的HUD動畫，然後會移除|
+|updateProgess(text:font:textColor:)|更新進度文字及字型|
+
 ### Example
 ```swift
 import UIKit

@@ -12,11 +12,9 @@ let package = Package(
         .library(name: "WWHUD", targets: ["WWHUD"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/William-Weng/WWPrint.git", from: "1.2.0"),
     ],
     targets: [
-        .target(name: "WWHUD", dependencies: []),
-        .testTarget(name: "WWHUDTests", dependencies: ["WWHUD"]),
+        .target(name: "WWHUD", resources: [.copy("Privacy")])
     ],
     swiftLanguageVersions: [
         .v5

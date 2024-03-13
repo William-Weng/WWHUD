@@ -2,7 +2,7 @@
 //  HUDViewController.swift
 //  WWHUD
 //
-//  Created by iOS on 2022/2/10.
+//  Created by William.Weng on 2022/2/10.
 //
 
 import UIKit

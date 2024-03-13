@@ -2,11 +2,12 @@
 //  WWHUD.swift
 //  WWHUD
 //
-//  Created by iOS on 2022/3/2.
+//  Created by William.Weng on 2022/3/2.
 //
 
 import UIKit
 
+// MARK: - WWHUD
 open class WWHUD {
     
     public enum AnimationEffect {
