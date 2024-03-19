@@ -16,8 +16,8 @@ dependencies: [
 ]
 ```
 
-### Function - 
-|可用函式|函式|功能|
+### Function - 可用函式
+|函式|功能|
 |-|-|
 |display(effect:height:backgroundColor:)|顯示HUD動畫|
 |dismiss(animation:options:completion:)|移除HUD顯示|
