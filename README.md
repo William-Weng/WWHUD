@@ -12,7 +12,7 @@
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.2.1"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.3.0"))
 ]
 ```
 
@@ -23,6 +23,12 @@ dependencies: [
 |dismiss(animation:options:completion:)|移除HUD顯示|
 |flash(effect:height:backgroundColor:animation:options:completion:)|顯示一段時間的HUD動畫，然後會移除|
 |updateProgess(text:font:textColor:)|更新進度文字及字型|
+|closeLabelSetting(title:isHidden:font:)|強制關閉Label的顯示相關設定|
+
+### WWHUDDelegate
+|函式|功能|
+|-|-|
+|forceClose(hud:)|強制關閉HUD|
 
 ### Example
 ```swift
@@ -35,7 +41,18 @@ final class ViewController: UIViewController {
     private var timer: CADisplayLink?
     private var percentage: Int = 0
     
-    override func viewDidLoad() { super.viewDidLoad() }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        WWHUD.setting(delegate: self)
+    }
+}
+
+extension ViewController: WWHUDDelegate {
+    
+    func forceClose(hud: WWHUD) {
+        percentage = 0
+        cleanTimer()
+    }
 }
 
 private extension ViewController {
@@ -53,7 +70,7 @@ private extension ViewController {
         guard let gifUrl = Bundle.main.url(forResource: "SeeYou", withExtension: ".gif") else { return }
         
         updateProgressPercentage(selector: #selector(updateProgressForGifHUD))
-        WWHUD.shared.display(effect: .gif(url: gifUrl, options: nil), height: 256.0, backgroundColor: .red.withAlphaComponent(0.3))
+        WWHUD.shared.display(effect: .gif(url: gifUrl, options: nil), height: 256.0, backgroundColor: .black.withAlphaComponent(0.3))
     }
     
     @IBAction func flashHUD(_ sender: UIBarButtonItem) {
@@ -64,7 +81,7 @@ private extension ViewController {
             wwPrint(postion)
         }
     }
- 
+
     @objc private func updateProgressForHUD(_ sender: CADisplayLink) {
         
         let percentageText = "\(percentage) %"
@@ -90,6 +107,7 @@ private extension ViewController {
         case 61...90:
             percentageText = "就快下載完成了…"
             percentageTextColor = .green
+            WWHUD.shared.closeLabelSetting(title: "關閉")
         case 90...99:
             percentageText = "還差一點點…"
             percentageTextColor = .blue
@@ -106,11 +124,15 @@ private extension ViewController {
 }
 
 private extension ViewController {
-    
-    func dismissHUD() {
-        percentage = 0
+
+    func cleanTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    func dismissHUD() {
+        cleanTimer()
+        percentage = 0
         WWHUD.shared.dismiss { _ in WWHUD.shared.updateProgess(text: nil) }
     }
     

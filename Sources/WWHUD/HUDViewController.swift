@@ -7,13 +7,22 @@
 
 import UIKit
 
+// MARK: - HUDViewControllerDelegate
+protocol HUDViewControllerDelegate: AnyObject {
+    func forceClose()       // 強制關閉HUD
+}
+
+// MARK: - HUDViewController
 final class HUDViewController: UIViewController {
     
     @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var myProgressLabel: UILabel!
+    @IBOutlet weak var forceCloseLabel: UILabel!
     @IBOutlet weak var myActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var heightLayoutConstraint: NSLayoutConstraint!
-        
+    
+    weak var delegate: HUDViewControllerDelegate?
+    
     private var replicatorLayer = CAReplicatorLayer()
     private var gifEffectImageView: UIImageView?
     private var gifEffectBlock: ((Result<Constant.GIFImageInformation, Error>) -> Void)?
@@ -22,11 +31,20 @@ final class HUDViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         transparent()
-        myProgressLabel.text = ""
+        updateProgess(text: nil)
+        forceCloseLabelSetting()
+    }
+    
+    @objc func forceClose(_ recognizer: UITapGestureRecognizer) {
+        delegate?.forceClose()
+    }
+    
+    deinit {
+        delegate = nil
     }
 }
 
-// MARK: - 公開的funciton
+// MARK: - 半公開的funciton
 extension HUDViewController {
     
     /// [顯示iOS系統預設的UIActivityIndicatorView](http://furnacedigital.blogspot.com/2011/06/uiactivityindicatorview.html)
@@ -131,6 +149,17 @@ extension HUDViewController {
         myProgressLabel.font = font
         myProgressLabel.text = text
     }
+    
+    /// 關閉Label設定
+    /// - Parameters:
+    ///   - title: String?
+    ///   - isHidden: Bool
+    ///   - font: UIFont
+    func closeLabelSetting(title: String? = "CLOSE", isHidden: Bool = false, font: UIFont = .systemFont(ofSize: 16)) {
+        forceCloseLabel.text = title
+        forceCloseLabel.font = font
+        forceCloseLabel.isHidden = isHidden
+    }
 }
 
 // MARK: - 小工具
@@ -198,6 +227,16 @@ private extension HUDViewController {
         
         gifEffectImageView?.removeFromSuperview()
         gifEffectImageView = nil
+    }
+    
+    /// 設定強制關閉Label功能
+    func forceCloseLabelSetting() {
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(HUDViewController.forceClose(_:)))
+        
+        closeLabelSetting(title: nil, isHidden: true)
+        forceCloseLabel.addGestureRecognizer(tap)
+        forceCloseLabel.isUserInteractionEnabled = true
     }
 }
 

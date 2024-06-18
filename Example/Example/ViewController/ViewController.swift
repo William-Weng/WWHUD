@@ -16,7 +16,19 @@ final class ViewController: UIViewController {
     private var timer: CADisplayLink?
     private var percentage: Int = 0
     
-    override func viewDidLoad() { super.viewDidLoad() }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        WWHUD.setting(delegate: self)
+    }
+}
+
+// MARK: - WWHUDDelegate
+extension ViewController: WWHUDDelegate {
+    
+    func forceClose(hud: WWHUD) {
+        percentage = 0
+        cleanTimer()
+    }
 }
 
 // MARK: - @IBAction
@@ -35,7 +47,7 @@ private extension ViewController {
         guard let gifUrl = Bundle.main.url(forResource: "SeeYou", withExtension: ".gif") else { return }
         
         updateProgressPercentage(selector: #selector(updateProgressForGifHUD))
-        WWHUD.shared.display(effect: .gif(url: gifUrl, options: nil), height: 256.0, backgroundColor: .red.withAlphaComponent(0.3))
+        WWHUD.shared.display(effect: .gif(url: gifUrl, options: nil), height: 256.0, backgroundColor: .black.withAlphaComponent(0.3))
     }
     
     @IBAction func flashHUD(_ sender: UIBarButtonItem) {
@@ -76,6 +88,7 @@ private extension ViewController {
         case 61...90:
             percentageText = "就快下載完成了…"
             percentageTextColor = .green
+            WWHUD.shared.closeLabelSetting(title: "關閉")
         case 90...99:
             percentageText = "還差一點點…"
             percentageTextColor = .blue
@@ -94,11 +107,16 @@ private extension ViewController {
 // MARK: - 小工具
 private extension ViewController {
     
-    /// 取消HUD
-    func dismissHUD() {
-        percentage = 0
+    /// 清除Timer
+    func cleanTimer() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    /// 取消HUD
+    func dismissHUD() {
+        cleanTimer()
+        percentage = 0
         WWHUD.shared.dismiss { _ in WWHUD.shared.updateProgess(text: nil) }
     }
     

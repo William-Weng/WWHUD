@@ -7,9 +7,15 @@
 
 import UIKit
 
+// MARK: - WWHUDDelegate
+public protocol WWHUDDelegate: AnyObject {
+    func forceClose(hud: WWHUD)   // 強制關閉HUD
+}
+
 // MARK: - WWHUD
 open class WWHUD {
     
+    /// 動畫類型
     public enum AnimationEffect {
         case `default`
         case shake(image: UIImage?, angle: Float = 0.7, duration: CFTimeInterval = 0.5)
@@ -19,6 +25,8 @@ open class WWHUD {
     }
     
     public static let shared = WWHUD()
+    
+    static weak var delegate: WWHUDDelegate?
     
     private let hudWindow: UIWindow
     private let hudViewController: HUDViewController
@@ -35,13 +43,37 @@ open class WWHUD {
         hudWindow = window
         hudWindow.makeKeyAndVisible()
         hudViewController = rootViewController
+        hudViewController.delegate = self
         hudViewController.loadViewIfNeeded()
+    }
+        
+    deinit {
+        Self.delegate = nil
+    }
+}
+
+// MARK: - HUDViewControllerDelegate
+extension WWHUD: HUDViewControllerDelegate {
+    
+    func forceClose() {
+        dismiss()
+        Self.delegate?.forceClose(hud: self)
+    }
+}
+
+// MARK: - 公開的static function
+public extension WWHUD {
+    
+    /// 相關設定
+    /// - Parameter delegate: WWHUDDelegate?
+    static func setting(delegate: WWHUDDelegate?) {
+        self.delegate = delegate
     }
 }
 
 // MARK: - 公開的function
 public extension WWHUD {
-    
+        
     /// [顯示HUD動畫](https://github.com/relatedcode/ProgressHUD)
     /// - Parameters:
     ///   - effect: 選擇HUD的樣式
@@ -52,6 +84,7 @@ public extension WWHUD {
         hudWindow.alpha = 1.0
         hudWindow.backgroundColor = backgroundColor
         hudViewController.heightSetting(height)
+        hudViewController.closeLabelSetting(title: nil, isHidden: true)
         
         guard let effect = effect else { return }
         
@@ -71,12 +104,13 @@ public extension WWHUD {
     ///   - completion: ((UIViewAnimatingPosition) -> Void)?
     func dismiss(animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)? = nil) {
         
-        hudWindow.alpha = 1.0
+        // hudWindow.alpha = 1.0
         
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: [.curveEaseInOut], animations: {
             self.hudWindow.alpha = 0.0
         }, completion: { (position) in
             self.hudViewController.removeAllEffect()
+            self.hudViewController.updateProgess(text: nil)
             completion?(position)
         })
     }
@@ -105,5 +139,14 @@ public extension WWHUD {
     ///   - textColor: 文字顏色
     func updateProgess(text: String?, font: UIFont = .systemFont(ofSize: 36.0), textColor: UIColor = .white) {
         self.hudViewController.updateProgess(text: text, font: font, textColor: textColor)
+    }
+    
+    /// 關閉Label設定
+    /// - Parameters:
+    ///   - title: String?
+    ///   - isHidden: Bool
+    ///   - font: UIFont
+    func closeLabelSetting(title: String = "CLOSE", isHidden: Bool = false, font: UIFont = .systemFont(ofSize: 16)) {
+        self.hudViewController.closeLabelSetting(title: title, isHidden: isHidden, font: font)
     }
 }
