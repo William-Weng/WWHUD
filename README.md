@@ -43,7 +43,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        WWHUD.setting(delegate: self)
+        WWHUD.shared.delegate = self
     }
 }
 

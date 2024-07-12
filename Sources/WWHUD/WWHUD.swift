@@ -26,7 +26,7 @@ open class WWHUD {
     
     public static let shared = WWHUD()
     
-    static weak var delegate: WWHUDDelegate?
+    public weak var delegate: WWHUDDelegate?
     
     private let hudWindow: UIWindow
     private let hudViewController: HUDViewController
@@ -41,14 +41,15 @@ open class WWHUD {
         }
         
         hudWindow = window
-        hudWindow.makeKeyAndVisible()
+        hudWindow.alpha = 0.0
+        
         hudViewController = rootViewController
         hudViewController.delegate = self
         hudViewController.loadViewIfNeeded()
     }
         
     deinit {
-        Self.delegate = nil
+        delegate = nil
     }
 }
 
@@ -57,17 +58,7 @@ extension WWHUD: HUDViewControllerDelegate {
     
     func forceClose() {
         dismiss()
-        Self.delegate?.forceClose(hud: self)
-    }
-}
-
-// MARK: - 公開的static function
-public extension WWHUD {
-    
-    /// 相關設定
-    /// - Parameter delegate: WWHUDDelegate?
-    static func setting(delegate: WWHUDDelegate?) {
-        self.delegate = delegate
+        delegate?.forceClose(hud: self)
     }
 }
 
@@ -83,6 +74,8 @@ public extension WWHUD {
         
         hudWindow.alpha = 1.0
         hudWindow.backgroundColor = backgroundColor
+        hudWindow.makeKeyAndVisible()
+        
         hudViewController.heightSetting(height)
         hudViewController.closeLabelSetting(title: nil, isHidden: true)
         
@@ -103,9 +96,7 @@ public extension WWHUD {
     ///   - options: UIView.AnimationOptions
     ///   - completion: ((UIViewAnimatingPosition) -> Void)?
     func dismiss(animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)? = nil) {
-        
-        // hudWindow.alpha = 1.0
-        
+                
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: 0, options: [.curveEaseInOut], animations: {
             self.hudWindow.alpha = 0.0
         }, completion: { (position) in
@@ -138,7 +129,7 @@ public extension WWHUD {
     ///   - font: UIFont
     ///   - textColor: 文字顏色
     func updateProgess(text: String?, font: UIFont = .systemFont(ofSize: 36.0), textColor: UIColor = .white) {
-        self.hudViewController.updateProgess(text: text, font: font, textColor: textColor)
+        hudViewController.updateProgess(text: text, font: font, textColor: textColor)
     }
     
     /// 關閉Label設定
@@ -147,6 +138,6 @@ public extension WWHUD {
     ///   - isHidden: Bool
     ///   - font: UIFont
     func closeLabelSetting(title: String = "CLOSE", isHidden: Bool = false, font: UIFont = .systemFont(ofSize: 16)) {
-        self.hudViewController.closeLabelSetting(title: title, isHidden: isHidden, font: font)
+        hudViewController.closeLabelSetting(title: title, isHidden: isHidden, font: font)
     }
 }
