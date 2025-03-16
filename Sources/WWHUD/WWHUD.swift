@@ -65,7 +65,7 @@ public extension WWHUD {
     ///   - effect: 選擇HUD的樣式
     ///   - height: HUD框框的大小
     ///   - backgroundColor: 整個的背景色
-    func display(effect: AnimationEffect, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.3)) {
+    func display(effect: AnimationEffect = .default, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.3)) {
         
         hudWindow.alpha = 1.0
         hudWindow.backgroundColor = backgroundColor
