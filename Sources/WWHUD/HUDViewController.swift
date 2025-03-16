@@ -7,11 +7,6 @@
 
 import UIKit
 
-// MARK: - HUDViewControllerDelegate
-protocol HUDViewControllerDelegate: AnyObject {
-    func forceClose()       // 強制關閉HUD
-}
-
 // MARK: - HUDViewController
 final class HUDViewController: UIViewController {
     
@@ -21,7 +16,7 @@ final class HUDViewController: UIViewController {
     @IBOutlet weak var myActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var heightLayoutConstraint: NSLayoutConstraint!
     
-    weak var delegate: HUDViewControllerDelegate?
+    weak var delegate: HUDViewController.Delegate?
     
     private var replicatorLayer = CAReplicatorLayer()
     private var gifEffectImageView: UIImageView?

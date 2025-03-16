@@ -3,11 +3,9 @@
 //  Example
 //
 //  Created by William.Weng on 2021/9/15.
-//  ~/Library/Caches/org.swift.swiftpm/
-//  file:///Users/william/Desktop/WWHUD
+//
 
 import UIKit
-import WWPrint
 import WWHUD
 
 // MARK: - ViewController
@@ -18,12 +16,12 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        WWHUD.setting(delegate: self)
+        WWHUD.shared.delegate = self
     }
 }
 
 // MARK: - WWHUDDelegate
-extension ViewController: WWHUDDelegate {
+extension ViewController: WWHUD.Delegate {
     
     func forceClose(hud: WWHUD) {
         percentage = 0
@@ -35,6 +33,10 @@ extension ViewController: WWHUDDelegate {
 private extension ViewController {
     
     @IBAction func displayHUD(_ sender: UIBarButtonItem) {
+        WWHUD.shared.flash()
+    }
+    
+    @IBAction func displayImageHUD(_ sender: UIBarButtonItem) {
         
         let image = #imageLiteral(resourceName: "Crab")
         
@@ -55,13 +57,17 @@ private extension ViewController {
         let image = #imageLiteral(resourceName: "White")
         
         WWHUD.shared.flash(effect: .indicator(image: image, count: 12, size: CGSize(width: 2.0, height: 20), duration: 1.0, backgroundColor: .purple), height: 64, backgroundColor: .green.withAlphaComponent(0.3), animation: 3.0) { postion in
-            wwPrint(postion)
+            print(postion)
         }
     }
+}
+
+// MARK: - @objc
+private extension ViewController {
     
     /// 更新進度 => 0% ~ 100%
     /// - Parameter sender: CADisplayLink
-    @objc private func updateProgressForHUD(_ sender: CADisplayLink) {
+    @objc func updateProgressForHUD(_ sender: CADisplayLink) {
         
         let percentageText = "\(percentage) %"
         
@@ -73,7 +79,7 @@ private extension ViewController {
     
     // 更新進度 => "努力下載中…" -> "下載快一半…" -> "就快下載完成了…" -> "還差一點點…" -> "終於下載完成了…"
     /// - Parameter sender: CADisplayLink
-    @objc private func updateProgressForGifHUD(_ sender: CADisplayLink) {
+    @objc func updateProgressForGifHUD(_ sender: CADisplayLink) {
         
         var percentageText = "努力下載中…"
         var percentageTextColor: UIColor = .clear

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dyl-0f-9pf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dyl-0f-9pf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,6 +23,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" systemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="urY-z4-4RY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5zp-ts-2FK"/>
                             <constraint firstAttribute="bottom" secondItem="urY-z4-4RY" secondAttribute="bottom" id="935-I1-djs"/>
@@ -32,22 +33,29 @@
                     </view>
                     <navigationItem key="navigationItem" title="HUD" id="nvs-zi-2RQ">
                         <leftBarButtonItems>
-                            <barButtonItem title="Flash" id="l9k-DL-M3o">
-                                <connections>
-                                    <action selector="flashHUD:" destination="BYZ-38-t0r" id="HPT-rq-By2"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem title="GIF" id="JXw-tI-vpb">
                                 <connections>
                                     <action selector="displayGifHUD:" destination="BYZ-38-t0r" id="3fL-vs-DlC"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Image" id="iNt-f0-meM">
+                                <connections>
+                                    <action selector="displayImageHUD:" destination="BYZ-38-t0r" id="0jg-zO-4Oj"/>
+                                </connections>
+                            </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="Image" id="iNt-f0-meM">
-                            <connections>
-                                <action selector="displayHUD:" destination="BYZ-38-t0r" id="mPo-AI-CKp"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Default" id="x0c-Yh-DYC">
+                                <connections>
+                                    <action selector="displayHUD:" destination="BYZ-38-t0r" id="OA4-t4-FGM"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Flash" id="l9k-DL-M3o">
+                                <connections>
+                                    <action selector="flashHUD:" destination="BYZ-38-t0r" id="HPT-rq-By2"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -60,7 +68,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dyl-0f-9pf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0CM-fo-0qj">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -74,9 +82,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="213.33332824707031" height="379.33334350585938"/>
+        <image name="Background" width="400" height="599.66668701171875"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="viewFlipsideBackgroundColor">
+            <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

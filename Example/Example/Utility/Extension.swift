@@ -7,6 +7,20 @@
 
 import UIKit
 
+// MARK: - UINavigationBar (class function)
+extension UINavigationBar {
+    
+    /// [透明背景 (透明底線) => application(_:didFinishLaunchingWithOptions:)](https://sarunw.com/posts/uinavigationbar-changes-in-ios13/)
+    func _transparent() {
+                
+        let transparentBackground = UIImage()
+        
+        self.isTranslucent = true
+        self.setBackgroundImage(transparentBackground, for: .default)
+        self.shadowImage = transparentBackground
+    }
+}
+
 // MARK: - CADisplayLink (static function)
 extension CADisplayLink {
     

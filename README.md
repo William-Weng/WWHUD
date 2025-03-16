@@ -1,22 +1,22 @@
 # WWHUD - Head Up Display
 
-[![Swift-5.6](https://img.shields.io/badge/Swift-5.6-orange.svg?style=flat)](https://developer.apple.com/swift/) [![iOS-14.0](https://img.shields.io/badge/iOS-14.0-pink.svg?style=flat)](https://developer.apple.com/swift/) ![](https://img.shields.io/github/v/tag/William-Weng/WWHUD) [![Swift Package Manager-SUCCESS](https://img.shields.io/badge/Swift_Package_Manager-SUCCESS-blue.svg?style=flat)](https://developer.apple.com/swift/) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-yellow.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift-5.7](https://img.shields.io/badge/Swift-5.7-orange.svg?style=flat)](https://developer.apple.com/swift/) [![iOS-15.0](https://img.shields.io/badge/iOS-15.0-pink.svg?style=flat)](https://developer.apple.com/swift/) ![](https://img.shields.io/github/v/tag/William-Weng/WWHUD) [![Swift Package Manager-SUCCESS](https://img.shields.io/badge/Swift_Package_Manager-SUCCESS-blue.svg?style=flat)](https://developer.apple.com/swift/) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-yellow.svg?style=flat)](https://developer.apple.com/swift/)
 
 ## [Introduction - 簡介](https://swiftpackageindex.com/William-Weng)
 - [Custom read animation, support custom pictures, GIF animation.](https://youtu.be/6XVxvRKoAHM)
 - [自定義讀取動畫，支援自定義圖片、GIF動畫。](https://youtu.be/6XVxvRKoAHM)
 
-![](./Example.gif)
+![](./Example.webp)
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.3.0"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.3.2"))
 ]
 ```
 
-### Function - 可用函式
+### [Function - 可用函式](https://zh.pngtree.com/freebackground/pink-beautiful-ancient-spring-on-new-peach-flower-background_1127034.html)
 |函式|功能|
 |-|-|
 |display(effect:height:backgroundColor:)|顯示HUD動畫|
@@ -25,7 +25,7 @@ dependencies: [
 |updateProgess(text:font:textColor:)|更新進度文字及字型|
 |closeLabelSetting(title:isHidden:font:)|強制關閉Label的顯示相關設定|
 
-### WWHUDDelegate
+### [WWHUD.Delegate](https://ezgif.com/video-to-webp)
 |函式|功能|
 |-|-|
 |forceClose(hud:)|強制關閉HUD|
@@ -33,7 +33,6 @@ dependencies: [
 ### Example
 ```swift
 import UIKit
-import WWPrint
 import WWHUD
 
 final class ViewController: UIViewController {
@@ -47,7 +46,7 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: WWHUDDelegate {
+extension ViewController: WWHUD.Delegate {
     
     func forceClose(hud: WWHUD) {
         percentage = 0
@@ -58,6 +57,10 @@ extension ViewController: WWHUDDelegate {
 private extension ViewController {
     
     @IBAction func displayHUD(_ sender: UIBarButtonItem) {
+        WWHUD.shared.flash()
+    }
+    
+    @IBAction func displayImageHUD(_ sender: UIBarButtonItem) {
         
         let image = #imageLiteral(resourceName: "Crab")
         
@@ -78,11 +81,14 @@ private extension ViewController {
         let image = #imageLiteral(resourceName: "White")
         
         WWHUD.shared.flash(effect: .indicator(image: image, count: 12, size: CGSize(width: 2.0, height: 20), duration: 1.0, backgroundColor: .purple), height: 64, backgroundColor: .green.withAlphaComponent(0.3), animation: 3.0) { postion in
-            wwPrint(postion)
+            print(postion)
         }
     }
+}
 
-    @objc private func updateProgressForHUD(_ sender: CADisplayLink) {
+private extension ViewController {
+    
+    @objc func updateProgressForHUD(_ sender: CADisplayLink) {
         
         let percentageText = "\(percentage) %"
         
@@ -92,7 +98,7 @@ private extension ViewController {
         if (percentage > 100) { dismissHUD() }
     }
     
-    @objc private func updateProgressForGifHUD(_ sender: CADisplayLink) {
+    @objc func updateProgressForGifHUD(_ sender: CADisplayLink) {
         
         var percentageText = "努力下載中…"
         var percentageTextColor: UIColor = .clear
@@ -123,8 +129,9 @@ private extension ViewController {
     }
 }
 
+// MARK: - 小工具
 private extension ViewController {
-
+    
     func cleanTimer() {
         timer?.invalidate()
         timer = nil
@@ -145,5 +152,4 @@ private extension ViewController {
     }
 }
 ```
-
 

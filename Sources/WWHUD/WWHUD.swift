@@ -7,11 +7,6 @@
 
 import UIKit
 
-// MARK: - WWHUDDelegate
-public protocol WWHUDDelegate: AnyObject {
-    func forceClose(hud: WWHUD)   // 強制關閉HUD
-}
-
 // MARK: - WWHUD
 open class WWHUD {
     
@@ -26,7 +21,7 @@ open class WWHUD {
     
     public static let shared = WWHUD()
     
-    public weak var delegate: WWHUDDelegate?
+    public weak var delegate: WWHUD.Delegate?
     
     private let hudWindow: UIWindow
     private let hudViewController: HUDViewController
@@ -54,7 +49,7 @@ open class WWHUD {
 }
 
 // MARK: - HUDViewControllerDelegate
-extension WWHUD: HUDViewControllerDelegate {
+extension WWHUD: HUDViewController.Delegate {
     
     func forceClose() {
         dismiss()
@@ -70,7 +65,7 @@ public extension WWHUD {
     ///   - effect: 選擇HUD的樣式
     ///   - height: HUD框框的大小
     ///   - backgroundColor: 整個的背景色
-    func display(effect: AnimationEffect? = nil, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.3)) {
+    func display(effect: AnimationEffect, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.3)) {
         
         hudWindow.alpha = 1.0
         hudWindow.backgroundColor = backgroundColor
@@ -78,9 +73,7 @@ public extension WWHUD {
         
         hudViewController.heightSetting(height)
         hudViewController.closeLabelSetting(title: nil, isHidden: true)
-        
-        guard let effect = effect else { return }
-        
+                
         switch effect {
         case .default: hudViewController.defaultEffect()
         case .shake(let image, let angle, let duration): hudViewController.shakeEffect(with: image, angle: angle, duration: duration)
@@ -108,13 +101,13 @@ public extension WWHUD {
     
     /// 顯示一段時間的HUD動畫，然後會移除
     /// - Parameters:
-    ///   - effect: AnimationEffect?
+    ///   - effect: AnimationEffect
     ///   - height: CGFloat
     ///   - backgroundColor: UIColor
     ///   - duration: TimeInterval
     ///   - options: UIView.AnimationOptions
     ///   - completion: ((UIViewAnimatingPosition) -> Void)?
-    func flash(effect: AnimationEffect? = nil, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.1), animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)? = nil) {
+    func flash(effect: AnimationEffect = .default, height: CGFloat = 64.0, backgroundColor: UIColor = .black.withAlphaComponent(0.1), animation duration: TimeInterval = 0.5, options: UIView.AnimationOptions = [.curveEaseInOut], completion: ((UIViewAnimatingPosition) -> Void)? = nil) {
         
         display(effect: effect, height: height, backgroundColor: backgroundColor)
         
