@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "WWHUD",
     platforms: [
-        .iOS(.v15)
+        .iOS(.v16)
     ],
     products: [
         .library(name: "WWHUD", targets: ["WWHUD"]),
@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-        .target(name: "WWHUD", resources: [.copy("Privacy")])
+        .target(name: "WWHUD", resources: [.process("Xib") , .copy("Privacy")])
     ],
     swiftLanguageVersions: [
         .v5
