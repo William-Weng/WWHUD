@@ -41,7 +41,7 @@ private extension ViewController {
         let image = #imageLiteral(resourceName: "Crab")
         
         updateProgressPercentage(selector: #selector(updateProgressForHUD))
-        WWHUD.shared.display(effect: .shake(image: image, angle: 10.0, duration: 1.0), height: 128, backgroundColor: .green.withAlphaComponent(0.3))
+        WWHUD.shared.display(effect: .shake(image: image, angle: 10.0, duration: 1.0), height: 128, backgroundColor: .black.withAlphaComponent(0.3))
     }
     
     @IBAction func displayGifHUD(_ sender: UIBarButtonItem) {
@@ -56,7 +56,7 @@ private extension ViewController {
         
         let image = #imageLiteral(resourceName: "White")
         
-        WWHUD.shared.flash(effect: .indicator(image: image, count: 12, size: CGSize(width: 2.0, height: 20), duration: 1.0, backgroundColor: .purple), height: 64, backgroundColor: .green.withAlphaComponent(0.3), animation: 3.0) { postion in
+        WWHUD.shared.flash(effect: .indicator(image: image, count: 8, size: CGSize(width: 20, height: 40), duration: 1.0, cornerRadius: 20, backgroundColor: .yellow), height: 200, backgroundColor: .black.withAlphaComponent(0.3), animation: 2.0) { postion in
             print(postion)
         }
     }

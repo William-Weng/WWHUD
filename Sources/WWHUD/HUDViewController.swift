@@ -103,14 +103,15 @@ extension HUDViewController {
     ///   - duration: 轉一圈的時間
     ///   - backgroundColor: 圖片的底色
     ///   - colorOffset: 一圈的顏色變化
-    func indicatorEffect(with image: UIImage, count: Float = 12, size: CGSize = CGSize(width: 2.0, height: 15.0), duration: CFTimeInterval = 0.5, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (1.0, 0, 0, 0)) {
+    ///   - cornerRadius: 圓角
+    func indicatorEffect(with image: UIImage, count: Float, size: CGSize, cornerRadius: CGFloat, duration: CFTimeInterval = 0.5, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (1.0, 0, 0, 0)) {
         
-        let instanceLayer = instanceLayerMaker(image: image, size: size, backgroundColor: backgroundColor)._opacityEffect(duration: duration)
+        let instanceLayer = instanceLayerMaker(image: image, size: size, backgroundColor: backgroundColor, cornerRadius: cornerRadius)._opacityEffect(duration: duration)
         
         removeAllEffect()
         replicatorLayer = replicatorLayerMaker(frame: myImageView.bounds, count: count, duration: duration, backgroundColor: backgroundColor, colorOffset: colorOffset)
         replicatorLayer.addSublayer(instanceLayer)
-                
+        
         myImageView.layer.addSublayer(replicatorLayer)
     }
     
@@ -176,6 +177,8 @@ private extension HUDViewController {
     /// - Returns: CAReplicatorLayer
     func replicatorLayerMaker(frame: CGRect, count: Float, duration: CFTimeInterval, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (1.0, 0, 0, 0)) -> CAReplicatorLayer {
         
+        print(frame)
+        
         let angle = Float.pi * 2.0 / count
         let transform = CATransform3DMakeRotation(CGFloat(angle), 0.0, 0.0, 1.0)
         let layer = CAReplicatorLayer._build(with: frame, count: count, preservesDepth: false, transform: transform, duration: duration, backgroundColor: backgroundColor, colorOffset: colorOffset)
@@ -188,8 +191,9 @@ private extension HUDViewController {
     ///   - image: 單一條的底圖
     ///   - size: 單一條的大小
     ///   - backgroundColor: 單一條的底色
+    ///   - cornerRadius: 圓角大小
     /// - Returns: CALayer
-    func instanceLayerMaker(image: UIImage, size: CGSize = CGSize(width: 2.0, height: 15.0), backgroundColor: UIColor = .white) -> CALayer {
+    func instanceLayerMaker(image: UIImage, size: CGSize, backgroundColor: UIColor, cornerRadius: CGFloat) -> CALayer {
         
         let middleX = myImageView.bounds.midX - size.width / 2.0
         let imageView = UIImageView(frame: CGRect(x: middleX, y: 0.0, width: size.width * 2, height: size.height))
@@ -197,6 +201,9 @@ private extension HUDViewController {
         imageView.image = image
         imageView.layer.opacity = 0.0
         imageView.backgroundColor = backgroundColor
+        
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = cornerRadius
         
         return imageView.layer
     }

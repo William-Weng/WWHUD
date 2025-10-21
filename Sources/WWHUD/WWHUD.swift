@@ -16,7 +16,7 @@ open class WWHUD {
         case shake(image: UIImage?, angle: Float = 0.7, duration: CFTimeInterval = 0.5)
         case translation(image: UIImage?, duration: CFTimeInterval = 1.0)
         case gif(url: URL, options: CFDictionary? = nil)
-        case indicator(image: UIImage, count: Float = 12, size: CGSize, duration: CFTimeInterval = 0.5, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (0, 0, 0, 0))
+        case indicator(image: UIImage, count: Float = 12, size: CGSize, duration: CFTimeInterval = 0.5, cornerRadius: CGFloat = 0, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (0, 0, 0, 0))
     }
     
     public static let shared = WWHUD()
@@ -79,7 +79,7 @@ public extension WWHUD {
         case .shake(let image, let angle, let duration): hudViewController.shakeEffect(with: image, angle: angle, duration: duration)
         case .translation(let image, let duration): hudViewController.translationEffect(with: image, duration: duration)
         case .gif(let url, let options): hudViewController.gifEffect(url: url, options: options)
-        case .indicator(let image, let count, let size, let duration, let color, let colorOffset): hudViewController.indicatorEffect(with: image, count: count, size: size, duration: duration, backgroundColor: color, colorOffset: colorOffset)
+        case .indicator(let image, let count, let size, let duration, let cornerRadius, let color, let colorOffset): hudViewController.indicatorEffect(with: image, count: count, size: size, cornerRadius: cornerRadius, duration: duration, backgroundColor: color, colorOffset: colorOffset)
         }
     }
     

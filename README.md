@@ -1,4 +1,4 @@
-# WWHUD - Head Up Display
+# WWHUD
 
 [![Swift-5.7](https://img.shields.io/badge/Swift-5.7-orange.svg?style=flat)](https://developer.apple.com/swift/) [![iOS-16.0](https://img.shields.io/badge/iOS-16.0-pink.svg?style=flat)](https://developer.apple.com/swift/) ![](https://img.shields.io/github/v/tag/William-Weng/WWHUD) [![Swift Package Manager-SUCCESS](https://img.shields.io/badge/Swift_Package_Manager-SUCCESS-blue.svg?style=flat)](https://developer.apple.com/swift/) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-yellow.svg?style=flat)](https://developer.apple.com/swift/)
 
@@ -12,7 +12,7 @@ https://github.com/user-attachments/assets/67c602f7-1beb-459f-89a5-361bb5e7e8c3
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.4.1"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.4.2"))
 ]
 ```
 
@@ -80,7 +80,7 @@ private extension ViewController {
         
         let image = #imageLiteral(resourceName: "White")
         
-        WWHUD.shared.flash(effect: .indicator(image: image, count: 12, size: CGSize(width: 2.0, height: 20), duration: 1.0, backgroundColor: .purple), height: 64, backgroundColor: .green.withAlphaComponent(0.3), animation: 3.0) { postion in
+        WWHUD.shared.flash(effect: .indicator(image: image, count: 8, size: CGSize(width: 20, height: 40), duration: 1.0, cornerRadius: 20, backgroundColor: .yellow), height: 200, backgroundColor: .black.withAlphaComponent(0.3), animation: 2.0) { postion in
             print(postion)
         }
     }

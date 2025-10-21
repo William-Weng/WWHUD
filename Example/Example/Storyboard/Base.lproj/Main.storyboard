@@ -70,6 +70,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0CM-fo-0qj">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -82,7 +83,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="400" height="599.66668701171875"/>
+        <image name="Background" width="360" height="640"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

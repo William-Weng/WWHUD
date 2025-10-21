@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/William-Weng/WWHUD",
       "state" : {
-        "revision" : "c60fc05a3033eafa736bd591e7041d79b5f6f209",
-        "version" : "1.4.0"
+        "revision" : "3e1b65898bc7f1e601f6ad4ada7bcf9d124ca29a",
+        "version" : "1.4.1"
       }
     }
   ],
