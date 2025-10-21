@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3DA392522D8663BF0005E40A /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA392512D8663BF0005E40A /* WWHUD */; };
-		3DA392552D866A5D0005E40A /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA392542D866A5D0005E40A /* WWHUD */; };
 		3DBCD87426F198EF00522E3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBCD87326F198EF00522E3B /* AppDelegate.swift */; };
 		3DBCD87826F198EF00522E3B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBCD87726F198EF00522E3B /* ViewController.swift */; };
 		3DBCD87B26F198EF00522E3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87926F198EF00522E3B /* Main.storyboard */; };
@@ -18,6 +17,8 @@
 		8106A3B527D5D80F004A9F6F /* SeeYou.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8106A3B427D5D80F004A9F6F /* SeeYou.gif */; };
 		8130039027D5D18100436128 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8130038F27D5D18100436128 /* Constant.swift */; };
 		8130039227D5D19000436128 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8130039127D5D19000436128 /* Extension.swift */; };
+		8144E12F2EA735C400049213 /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 8144E12E2EA735C400049213 /* WWHUD */; };
+		8144E1322EA7366A00049213 /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 8144E1312EA7366A00049213 /* WWHUD */; };
 		81C9796B2B85DE7900A7B6A2 /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81C9796A2B85DE7900A7B6A2 /* WWHUD */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +40,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DA392552D866A5D0005E40A /* WWHUD in Frameworks */,
+				8144E12F2EA735C400049213 /* WWHUD in Frameworks */,
 				3DA392522D8663BF0005E40A /* WWHUD in Frameworks */,
+				8144E1322EA7366A00049213 /* WWHUD in Frameworks */,
 				8104EC232C211958005739E6 /* WWHUD in Frameworks */,
 				81C9796B2B85DE7900A7B6A2 /* WWHUD in Frameworks */,
 			);
@@ -149,7 +151,8 @@
 				81C9796A2B85DE7900A7B6A2 /* WWHUD */,
 				8104EC222C211958005739E6 /* WWHUD */,
 				3DA392512D8663BF0005E40A /* WWHUD */,
-				3DA392542D866A5D0005E40A /* WWHUD */,
+				8144E12E2EA735C400049213 /* WWHUD */,
+				8144E1312EA7366A00049213 /* WWHUD */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -180,7 +183,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				3DA392532D866A5D0005E40A /* XCRemoteSwiftPackageReference "WWHUD" */,
+				8144E1302EA7366A00049213 /* XCRemoteSwiftPackageReference "WWHUD" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -365,7 +368,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4Q5CYDAG3B;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,7 +392,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4Q5CYDAG3B;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -429,12 +432,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3DA392532D866A5D0005E40A /* XCRemoteSwiftPackageReference "WWHUD" */ = {
+		8144E1302EA7366A00049213 /* XCRemoteSwiftPackageReference "WWHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWHUD";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.2;
+				minimumVersion = 1.4.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -444,13 +447,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWHUD;
 		};
-		3DA392542D866A5D0005E40A /* WWHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DA392532D866A5D0005E40A /* XCRemoteSwiftPackageReference "WWHUD" */;
-			productName = WWHUD;
-		};
 		8104EC222C211958005739E6 /* WWHUD */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = WWHUD;
+		};
+		8144E12E2EA735C400049213 /* WWHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWHUD;
+		};
+		8144E1312EA7366A00049213 /* WWHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8144E1302EA7366A00049213 /* XCRemoteSwiftPackageReference "WWHUD" */;
 			productName = WWHUD;
 		};
 		81C9796A2B85DE7900A7B6A2 /* WWHUD */ = {

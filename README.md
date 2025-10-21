@@ -6,13 +6,11 @@
 - [Custom read animation, support custom pictures, GIF animation.](https://youtu.be/6XVxvRKoAHM)
 - [自定義讀取動畫，支援自定義圖片、GIF動畫。](https://youtu.be/6XVxvRKoAHM)
 
-![](./Example.webp)
-
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.4.0"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.4.1"))
 ]
 ```
 

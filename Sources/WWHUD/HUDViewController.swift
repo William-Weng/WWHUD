@@ -234,5 +234,3 @@ private extension HUDViewController {
         forceCloseLabel.isUserInteractionEnabled = true
     }
 }
-
-
