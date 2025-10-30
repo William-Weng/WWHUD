@@ -20,7 +20,7 @@ final class HUDViewController: UIViewController {
     
     private var replicatorLayer = CAReplicatorLayer()
     private var gifEffectImageView: UIImageView?
-    private var gifEffectBlock: ((Result<Constant.GIFImageInformation, Error>) -> Void)?
+    private var gifEffectBlock: ((Result<WWHUD.GIFImageInformation, Error>) -> Void)?
     private var isGifEffectStop = false
     
     override func viewDidLoad() {
@@ -59,6 +59,19 @@ extension HUDViewController {
         
         myImageView.image = image
         myImageView._shakeEffect(angle: angle, duration: duration)
+    }
+    
+    /// 呼吸燈動畫效果 (透明度動畫)
+    /// - Parameters:
+    ///   - duration: 透明度變化時間
+    ///   - minAlpha: 最小透明度
+    ///   - maxAlpha: 最大透明度
+    func breathingLightEffect(with image: UIImage?, duration: TimeInterval, minAlpha: CGFloat, maxAlpha: CGFloat) {
+        
+        removeAllEffect()
+        
+        myImageView.image = image
+        myImageView.breathingLightEffect(duration: duration, minAlpha: minAlpha, maxAlpha: maxAlpha)
     }
     
     /// [轉圈圈效果](https://github.com/William-Weng/Swift-4/blob/master/ImageDeleteShakeAnimation/ImageDeleteShakeAnimation/ViewController.swift)
@@ -104,7 +117,7 @@ extension HUDViewController {
     ///   - backgroundColor: 圖片的底色
     ///   - colorOffset: 一圈的顏色變化
     ///   - cornerRadius: 圓角
-    func indicatorEffect(with image: UIImage, count: Float, size: CGSize, cornerRadius: CGFloat, duration: CFTimeInterval = 0.5, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (1.0, 0, 0, 0)) {
+    func indicatorEffect(with image: UIImage, count: Float, size: CGSize, cornerRadius: CGFloat, duration: CFTimeInterval = 0.5, backgroundColor: UIColor = .white, colorOffset: WWHUD.RGBAInformation = (1.0, 0, 0, 0)) {
         
         let instanceLayer = instanceLayerMaker(image: image, size: size, backgroundColor: backgroundColor, cornerRadius: cornerRadius)._opacityEffect(duration: duration)
         
@@ -114,7 +127,7 @@ extension HUDViewController {
         
         myImageView.layer.addSublayer(replicatorLayer)
     }
-    
+        
     /// 設定高度 (大小)
     /// - Parameter height: CGFloat
     func heightSetting(_ height: CGFloat = 64.0) {
@@ -175,7 +188,7 @@ private extension HUDViewController {
     ///   - backgroundColor: 單一條的底色
     ///   - colorOffset: 顏色偏移量
     /// - Returns: CAReplicatorLayer
-    func replicatorLayerMaker(frame: CGRect, count: Float, duration: CFTimeInterval, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (1.0, 0, 0, 0)) -> CAReplicatorLayer {
+    func replicatorLayerMaker(frame: CGRect, count: Float, duration: CFTimeInterval, backgroundColor: UIColor = .white, colorOffset: WWHUD.RGBAInformation = (1.0, 0, 0, 0)) -> CAReplicatorLayer {
         
         print(frame)
         
@@ -226,6 +239,7 @@ private extension HUDViewController {
     func removeGifEffect() {
         
         isGifEffectStop = true
+        myImageView.alpha = 1.0
         
         gifEffectImageView?.removeFromSuperview()
         gifEffectImageView = nil

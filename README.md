@@ -12,7 +12,7 @@ https://github.com/user-attachments/assets/cb43fb99-fe08-4250-8b85-da14f5ff6b32
 
 ```json
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.4.2"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.5.0"))
 ]
 ```
 

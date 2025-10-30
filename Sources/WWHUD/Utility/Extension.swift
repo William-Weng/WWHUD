@@ -2,7 +2,7 @@
 //  Extension.swift
 //  WWHUD
 //
-//  Created by iOS on 2022/3/2.
+//  Created by William Weng on 2025/3/16.
 //
 
 import UIKit
@@ -18,7 +18,7 @@ extension Float {
 extension UIColor {
     
     /// [取得顏色的RGBA值 => 0% ~ 100%](https://stackoverflow.com/questions/28644311/how-to-get-the-rgb-code-int-from-an-uicolor-in-swift)
-    func _rgba() -> Constant.RGBAInformation? {
+    func _rgba() -> WWHUD.RGBAInformation? {
         
         var red: CGFloat = 0
         var green: CGFloat = 0
@@ -110,6 +110,21 @@ extension UIView {
     func _translationEffect(duration: CFTimeInterval = 0.5) {
         _ = self.layer._translationEffect(duration: duration)
     }
+    
+    /// 呼吸燈動畫效果
+    /// - Parameters:
+    ///   - duration: 透明度變化時間
+    ///   - minAlpha: 最小透明度
+    ///   - maxAlpha: 最大透明度
+    func breathingLightEffect(duration: TimeInterval, minAlpha: CGFloat, maxAlpha: CGFloat) {
+        
+        let options: UIView.AnimationOptions = [.curveEaseInOut, .repeat, .autoreverse]
+        alpha = minAlpha
+        
+        UIView.animate(withDuration: duration, delay: .zero, options: options) {
+            self.alpha = maxAlpha
+        }
+    }
 }
 
 // MARK: - UIView (class function)
@@ -121,7 +136,7 @@ extension UIImageView {
     ///   - options: CFDictionary?
     ///   - result: Result<Bool, Error>
     /// - Returns: [OSStatus?](https://www.osstatus.com/)
-    func _GIF(url: URL, options: CFDictionary? = nil, result: ((Result<Constant.GIFImageInformation, Error>) -> Void)?) -> OSStatus? {
+    func _GIF(url: URL, options: CFDictionary? = nil, result: ((Result<WWHUD.GIFImageInformation, Error>) -> Void)?) -> OSStatus? {
         
         let cfUrl = url as CFURL
         let status = CGAnimateImageAtURLWithBlock(cfUrl, options) { (index, cgImage, pointer) in
@@ -140,7 +155,7 @@ extension CALayer {
     /// - Parameters:
     ///   - info: (animation: T: CAAnimation, keyPath: Constant.AnimationKeyPath)
     /// - Returns: Self
-    func _addAnimationInformation<T: CAAnimation>(_ info: (animation: T, keyPath: Constant.AnimationKeyPath)) -> Self {
+    func _addAnimationInformation<T: CAAnimation>(_ info: (animation: T, keyPath: WWHUD.AnimationKeyPath)) -> Self {
         self.add(info.animation, forKey: info.keyPath.rawValue)
         return self
     }
@@ -188,7 +203,7 @@ extension CAReplicatorLayer {
     ///   - color: UIColor
     ///   - colorOffset: Constant.RGBAInformation
     /// - Returns: Constant.RGBAInformation
-    static func _build(with frame: CGRect, count: Float = 12, preservesDepth: Bool = false, transform: CATransform3D, duration: CFTimeInterval = 1.0, backgroundColor: UIColor = .white, colorOffset: Constant.RGBAInformation = (0, 0, 0, 0)) -> CAReplicatorLayer {
+    static func _build(with frame: CGRect, count: Float = 12, preservesDepth: Bool = false, transform: CATransform3D, duration: CFTimeInterval = 1.0, backgroundColor: UIColor = .white, colorOffset: WWHUD.RGBAInformation = (0, 0, 0, 0)) -> CAReplicatorLayer {
         
         let layer = CAReplicatorLayer()
         let delay = duration / Double(count)
@@ -221,7 +236,7 @@ extension CAAnimation {
     ///   - toValue: 結束的值
     ///   - duration: 動畫時間
     /// - Returns: Constant.CAAnimationInformation
-    static func _basicAnimation(keyPath: Constant.AnimationKeyPath = .strokeEnd, fromValue: Any?, toValue: Any?, duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0) -> Constant.BasicAnimationInformation {
+    static func _basicAnimation(keyPath: WWHUD.AnimationKeyPath = .strokeEnd, fromValue: Any?, toValue: Any?, duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0) -> WWHUD.BasicAnimationInformation {
         
         let animation = CABasicAnimation(keyPath: keyPath.rawValue)
         
@@ -240,7 +255,7 @@ extension CAAnimation {
     ///   - duration: CFTimeInterval
     ///   - repeatCount: Float
     /// - Returns: Constant.KeyframeAnimationInformation
-    static func _keyframeAnimation(keyPath: Constant.AnimationKeyPath = .rotationZ, values: [Any]? , duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0) -> Constant.KeyframeAnimationInformation {
+    static func _keyframeAnimation(keyPath: WWHUD.AnimationKeyPath = .rotationZ, values: [Any]? , duration: CFTimeInterval = 5.0, repeatCount: Float = 1.0) -> WWHUD.KeyframeAnimationInformation {
         
         let animation = CAKeyframeAnimation()
         
@@ -259,7 +274,7 @@ extension CAAnimation {
     ///   - duration: CFTimeInterval
     ///   - repeatCount: Float
     /// - Returns: Constant.CAAnimationInformation
-    static func _opacityAnimation(fromValue: Float = 1.0, toValue: Float = 0.0, duration: CFTimeInterval = 1, repeatCount: Float = .infinity) -> Constant.BasicAnimationInformation {
+    static func _opacityAnimation(fromValue: Float = 1.0, toValue: Float = 0.0, duration: CFTimeInterval = 1, repeatCount: Float = .infinity) -> WWHUD.BasicAnimationInformation {
         return self._basicAnimation(keyPath: .opacity, fromValue: fromValue, toValue: toValue, duration: duration, repeatCount: repeatCount)
     }
     
@@ -268,9 +283,9 @@ extension CAAnimation {
     ///   - angle: [角度 (0° ~ 360°)](https://blog.csdn.net/longshihua/article/details/51159654)
     ///   - duration: 左右晃動的時間
     /// - Returns: Constant.KeyframeAnimationInformation
-    static func _shakeAnimation(angle: Float = 7.0 , duration: CFTimeInterval = 1.0) -> Constant.KeyframeAnimationInformation {
+    static func _shakeAnimation(angle: Float = 7.0 , duration: CFTimeInterval = 1.0) -> WWHUD.KeyframeAnimationInformation {
         
-        let animationKey = Constant.AnimationKeyPath.rotationZ
+        let animationKey = WWHUD.AnimationKeyPath.rotationZ
         let shakeAngle = angle._radian()
         let values = [shakeAngle, -1 * shakeAngle, shakeAngle]
         
@@ -280,9 +295,9 @@ extension CAAnimation {
     /// [轉圈圈效果](https://github.com/William-Weng/Swift-4/blob/master/ImageDeleteShakeAnimation/ImageDeleteShakeAnimation/ViewController.swift)
     /// - Parameter duration: 轉圈圈的時間
     /// - Returns: Constant.KeyframeAnimationInformation
-    static func _translationAnimation(duration: CFTimeInterval = 0.5) -> Constant.KeyframeAnimationInformation {
+    static func _translationAnimation(duration: CFTimeInterval = 0.5) -> WWHUD.KeyframeAnimationInformation {
         
-        let animationKey = Constant.AnimationKeyPath.rotationZ
+        let animationKey = WWHUD.AnimationKeyPath.rotationZ
         let values = [0, 2 * Double.pi]
         
         return self._keyframeAnimation(keyPath: animationKey, values: values, duration: duration, repeatCount: .infinity)
