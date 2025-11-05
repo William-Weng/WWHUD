@@ -189,9 +189,7 @@ private extension HUDViewController {
     ///   - colorOffset: 顏色偏移量
     /// - Returns: CAReplicatorLayer
     func replicatorLayerMaker(frame: CGRect, count: Float, duration: CFTimeInterval, backgroundColor: UIColor = .white, colorOffset: WWHUD.RGBAInformation = (1.0, 0, 0, 0)) -> CAReplicatorLayer {
-        
-        print(frame)
-        
+                
         let angle = Float.pi * 2.0 / count
         let transform = CATransform3DMakeRotation(CGFloat(angle), 0.0, 0.0, 1.0)
         let layer = CAReplicatorLayer._build(with: frame, count: count, preservesDepth: false, transform: transform, duration: duration, backgroundColor: backgroundColor, colorOffset: colorOffset)
