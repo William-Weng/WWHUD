@@ -6,8 +6,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/William-Weng/WWHUD",
       "state" : {
-        "revision" : "bbdff687c88964328b17002bdf347451117355f5",
-        "version" : "1.5.1"
+        "revision" : "8ffa449fd2192fdfd06622b77659edd65b4edd18",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "wwsvgimageview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWSVGImageView",
+      "state" : {
+        "revision" : "c3118da8460fb998d7436f9912e70cda9a796327",
+        "version" : "1.0.2"
       }
     }
   ],
