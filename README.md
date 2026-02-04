@@ -6,13 +6,10 @@
 - [Custom read animation, support custom pictures, GIF animation.](https://youtu.be/6XVxvRKoAHM)
 - [自定義讀取動畫，支援自定義圖片、GIF動畫。](https://youtu.be/6XVxvRKoAHM)
 
-https://github.com/user-attachments/assets/cb43fb99-fe08-4250-8b85-da14f5ff6b32
-
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
-
 ```
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.5.0"))
+    .package(url: "https://github.com/William-Weng/WWHUD.git", .upToNextMajor(from: "1.6.0"))
 ]
 ```
 
@@ -44,6 +41,11 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         WWHUD.shared.delegate = self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        WWHUD.shared.flash(animation: 2.0)
+    }
 }
 
 extension ViewController: WWHUD.Delegate {
@@ -56,10 +58,23 @@ extension ViewController: WWHUD.Delegate {
 
 private extension ViewController {
     
-    @IBAction func displayHUD(_ sender: UIBarButtonItem) {
-        WWHUD.shared.flash()
+    @IBAction func displaySVGHUD(_ sender: UIBarButtonItem) {
+        
+        let svg = """
+        <svg viewBox="0 0 160 160" width="160" height="160">
+            <circle cx="80" cy="80" r="50" fill="#67AAF9" />
+            <g transform="matrix(0.866, -0.5, 0.25, 0.433, 80, 80)">
+                <path d="M 0,70 A 65,70 0 0,0 65,0 5,5 0 0,1 75,0 75,70 0 0,1 0,70Z" fill="#F00">
+                    <animateTransform attributeName="transform" type="rotate" from="360 0 0" to="0 0 0" dur="1s" repeatCount="indefinite" />
+                </path>
+            </g>
+            <path d="M 50,0 A 50,50 0 0,0 -50,0Z" transform="matrix(0.866, -0.5, 0.5, 0.866, 80, 80)" fill="#67AAF9"/>
+        </svg>
+        """
+        
+        WWHUD.shared.flash(effect: .svg(svg: svg), height: 256.0, animation: 2.5)
     }
-    
+        
     @IBAction func displayImageHUD(_ sender: UIBarButtonItem) {
         
         let image = #imageLiteral(resourceName: "Crab")

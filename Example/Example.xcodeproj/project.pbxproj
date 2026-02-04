@@ -21,7 +21,9 @@
 		819AD9492EA7598900340CEF /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 819AD9482EA7598900340CEF /* WWHUD */; };
 		81C9796B2B85DE7900A7B6A2 /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81C9796A2B85DE7900A7B6A2 /* WWHUD */; };
 		81D1C4FC2EB3326500641403 /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1C4FB2EB3326500641403 /* WWHUD */; };
-		81D1C4FF2EB3385800641403 /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81D1C4FE2EB3385800641403 /* WWHUD */; };
+		81E0268B2F32E5AE00A064ED /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81E0268A2F32E5AE00A064ED /* WWHUD */; };
+		81E0268E2F32E66900A064ED /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81E0268D2F32E66900A064ED /* WWHUD */; };
+		81E026912F32ED5100A064ED /* WWHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 81E026902F32ED5100A064ED /* WWHUD */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,9 +46,11 @@
 			files = (
 				81D1C4FC2EB3326500641403 /* WWHUD in Frameworks */,
 				8144E12F2EA735C400049213 /* WWHUD in Frameworks */,
-				81D1C4FF2EB3385800641403 /* WWHUD in Frameworks */,
+				81E0268B2F32E5AE00A064ED /* WWHUD in Frameworks */,
 				3DA392522D8663BF0005E40A /* WWHUD in Frameworks */,
+				81E0268E2F32E66900A064ED /* WWHUD in Frameworks */,
 				819AD9492EA7598900340CEF /* WWHUD in Frameworks */,
+				81E026912F32ED5100A064ED /* WWHUD in Frameworks */,
 				8104EC232C211958005739E6 /* WWHUD in Frameworks */,
 				81C9796B2B85DE7900A7B6A2 /* WWHUD in Frameworks */,
 			);
@@ -158,7 +162,9 @@
 				8144E12E2EA735C400049213 /* WWHUD */,
 				819AD9482EA7598900340CEF /* WWHUD */,
 				81D1C4FB2EB3326500641403 /* WWHUD */,
-				81D1C4FE2EB3385800641403 /* WWHUD */,
+				81E0268A2F32E5AE00A064ED /* WWHUD */,
+				81E0268D2F32E66900A064ED /* WWHUD */,
+				81E026902F32ED5100A064ED /* WWHUD */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -189,7 +195,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				81D1C4FD2EB3385800641403 /* XCRemoteSwiftPackageReference "WWHUD" */,
+				81E0268F2F32ED5100A064ED /* XCRemoteSwiftPackageReference "WWHUD" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -438,12 +444,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		81D1C4FD2EB3385800641403 /* XCRemoteSwiftPackageReference "WWHUD" */ = {
+		81E0268F2F32ED5100A064ED /* XCRemoteSwiftPackageReference "WWHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWHUD";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.0;
+				minimumVersion = 1.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -473,9 +479,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = WWHUD;
 		};
-		81D1C4FE2EB3385800641403 /* WWHUD */ = {
+		81E0268A2F32E5AE00A064ED /* WWHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81D1C4FD2EB3385800641403 /* XCRemoteSwiftPackageReference "WWHUD" */;
+			productName = WWHUD;
+		};
+		81E0268D2F32E66900A064ED /* WWHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWHUD;
+		};
+		81E026902F32ED5100A064ED /* WWHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81E0268F2F32ED5100A064ED /* XCRemoteSwiftPackageReference "WWHUD" */;
 			productName = WWHUD;
 		};
 /* End XCSwiftPackageProductDependency section */

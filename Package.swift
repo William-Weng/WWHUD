@@ -12,9 +12,10 @@ let package = Package(
         .library(name: "WWHUD", targets: ["WWHUD"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/William-Weng/WWSVGImageView", from: "1.0.2")
     ],
     targets: [
-        .target(name: "WWHUD", resources: [.process("Xib") , .copy("Privacy")])
+        .target(name: "WWHUD", dependencies: ["WWSVGImageView"], resources: [.process("Xib") , .copy("Privacy")])
     ],
     swiftLanguageVersions: [
         .v5

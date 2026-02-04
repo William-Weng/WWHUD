@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WWSVGImageView
 
 // MARK: - WWHUD
 open class WWHUD {
@@ -42,6 +43,7 @@ open class WWHUD {
 // MARK: - HUDViewControllerDelegate
 extension WWHUD: HUDViewController.Delegate {
     
+    /// 強制關閉
     func forceClose() {
         dismiss()
         delegate?.forceClose(hud: self)
@@ -73,6 +75,7 @@ public extension WWHUD {
         case .indicator(let image, let count, let size, let duration, let cornerRadius, let color, let colorOffset): hudViewController.indicatorEffect(with: image, count: count, size: size, cornerRadius: cornerRadius, duration: duration, backgroundColor: color, colorOffset: colorOffset)
         case .breathingLight(image: let image, duration: let duration, minAlpha: let minAlpha, maxAlpha: let maxAlpha):
             hudViewController.breathingLightEffect(with: image, duration: duration, minAlpha: minAlpha, maxAlpha: maxAlpha)
+        case .svg(let svg): hudViewController.svgEffect(with: svg)
         }
     }
     

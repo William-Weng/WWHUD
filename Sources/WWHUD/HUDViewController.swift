@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WWSVGImageView
 
 // MARK: - HUDViewController
 final class HUDViewController: UIViewController {
@@ -20,6 +21,7 @@ final class HUDViewController: UIViewController {
     
     private var replicatorLayer = CAReplicatorLayer()
     private var gifEffectImageView: UIImageView?
+    private var svgEffectImageView: WWSVGImageView?
     private var gifEffectBlock: ((Result<WWHUD.GIFImageInformation, Error>) -> Void)?
     private var isGifEffectStop = false
     
@@ -127,7 +129,24 @@ extension HUDViewController {
         
         myImageView.layer.addSublayer(replicatorLayer)
     }
+    
+    /// SVG動畫效果
+    /// - Parameter svg: String
+    func svgEffect(with svg: String) {
         
+        let svgEffectImageView = WWSVGImageView.build()
+        
+        removeAllEffect()
+        
+        svgEffectImageView.frame = myImageView.bounds
+        svgEffectImageView.center = myImageView.center
+        
+        view.addSubview(svgEffectImageView)
+        svgEffectImageView.load(svg: svg)
+        
+        self.svgEffectImageView = svgEffectImageView
+    }
+    
     /// 設定高度 (大小)
     /// - Parameter height: CGFloat
     func heightSetting(_ height: CGFloat = 64.0) {
@@ -146,6 +165,9 @@ extension HUDViewController {
         myActivityIndicatorView.isHidden = true
         myImageView.image = nil
         myImageView.layer.removeAllAnimations()
+        
+        svgEffectImageView?.removeFromSuperview()
+        svgEffectImageView = nil
     }
     
     /// 更新進度文字及字型
